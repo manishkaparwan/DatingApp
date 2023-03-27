@@ -13,8 +13,10 @@ builder.Services.AddDbContext<DataContext>(opt=>
           builder.Configuration.GetConnectionString("DefaultConnection"));
        }
     );
-var app = builder.Build();
 
+    builder.Services.AddCors();
+var app = builder.Build();
+app.UseCors(x=>x.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"));
 app.MapControllers();
 
 app.Run();
